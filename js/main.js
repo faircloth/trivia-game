@@ -12,7 +12,7 @@ console.log('Hello, World');
 // });
 
 $('.card').flip({
-  trigger: 'hover',
+  trigger: 'click',
   axis: 'x'
 });
 
@@ -28,6 +28,19 @@ let q1 = new Question({
 
 $('#card-front').text(q1.title);
 $('#card-back').text(q1.question);
+
+$('#submitBtn').on('click', function () {
+  var answer = $('#answerText').val();
+  console.log(answer);
+  console.log(q1.answer);
+  if (answer == q1.answer) {
+    $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
+  } else {
+    $('#answer-result').text('OUT!').parent().addClass('red')
+  };
+});
+
+
 
 
 

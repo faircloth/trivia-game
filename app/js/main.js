@@ -93,7 +93,7 @@ console.log('Hello, World');
 // });
 
 (0, _jquery2['default'])('.card').flip({
-  trigger: 'hover',
+  trigger: 'click',
   axis: 'x'
 });
 
@@ -109,6 +109,17 @@ var q1 = new _questionJs2['default']({
 
 (0, _jquery2['default'])('#card-front').text(q1.title);
 (0, _jquery2['default'])('#card-back').text(q1.question);
+
+(0, _jquery2['default'])('#submitBtn').on('click', function () {
+  var answer = (0, _jquery2['default'])('#answerText').val();
+  console.log(answer);
+  console.log(q1.answer);
+  if (answer == q1.answer) {
+    (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
+  } else {
+    (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
+  };
+});
 
 console.log(q1.question);
 
