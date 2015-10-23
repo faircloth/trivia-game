@@ -1,4 +1,4 @@
-let Pitcher = function (obj) {
+let Pitcher = function(obj) {
   obj = obj || {};
 };
 
