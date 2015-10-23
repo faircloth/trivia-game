@@ -12,7 +12,7 @@ import Question from './question.js';
 
   describe('The Question', function() {
 
-    beforeEach (function () {
+    beforeEach (function() {
       window.q = new Question();
     });
 
@@ -38,7 +38,7 @@ import Question from './question.js';
 
   describe('The Hitter', function() {
 
-    beforeEach (function () {
+    beforeEach (function() {
       window.h = new Hitter();
     });
 
@@ -105,7 +105,7 @@ import Question from './question.js';
 
   describe('The Pitcher', function() {
 
-    beforeEach (function () {
+    beforeEach (function() {
       window.p = new Pitcher();
     });
 
