@@ -1,4 +1,66 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+/*! flip - v1.0.16 - 2015-08-09
+* https://github.com/nnattawat/flip
+* Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
+
+!(function (a) {
+  var b = function b(_b, c) {
+    _b.data("flipped", !0);var e = "rotate" + _b.data("axis");_b.find(_b.data("front")).css({ transform: e + (_b.data("reverse") ? "(-180deg)" : "(180deg)"), "z-index": "0" }), _b.find(_b.data("back")).css({ transform: e + "(0deg)", "z-index": "1" }), _b.one(d(), function () {
+      a(this).trigger("flip:done"), void 0 !== c && c.call(this);
+    });
+  },
+      c = function c(b, _c) {
+    b.data("flipped", !1);var e = "rotate" + b.data("axis");b.find(b.data("front")).css({ transform: e + "(0deg)", "z-index": "1" }), b.find(b.data("back")).css({ transform: e + (b.data("reverse") ? "(180deg)" : "(-180deg)"), "z-index": "0" }), b.one(d(), function () {
+      a(this).trigger("flip:done"), void 0 !== _c && _c.call(this);
+    });
+  },
+      d = function d() {
+    var a,
+        b = document.createElement("fakeelement"),
+        c = { transition: "transitionend", OTransition: "oTransitionEnd", MozTransition: "transitionend", WebkitTransition: "webkitTransitionEnd" };for (a in c) if (void 0 !== b.style[a]) return c[a];
+  };a.fn.flip = function (d, f) {
+    return ("function" == typeof d && (f = d), this.each(function () {
+      var g = a(this);if (void 0 === d || "boolean" != typeof d && "string" != typeof d) if (g.data("initiated")) !d || void 0 === d.axis && void 0 === d.reverse || e.call(this, d, function () {
+        g.trigger("flip:change"), void 0 !== f && f.call(this);
+      });else {
+        g.data("initiated", !0);var h = a.extend({ axis: "y", reverse: !1, trigger: "click", speed: 500, forceHeight: !1, forceWidth: !1, autoSize: !0, front: "auto", back: "auto" }, d);"auto" == h.front ? h.front = g.find(".front").length > 0 ? ".front" : "div:first-child" : "autostrict" == h.front && (h.front = "div:first-child"), "auto" == h.back ? h.back = g.find(".back").length > 0 ? ".back" : "div:first-child + div" : "autostrict" == h.back && (h.back = "div:first-child + div"), g.data("reverse", h.reverse), g.data("axis", h.axis), g.data("front", h.front), g.data("back", h.back);var i = "rotate" + ("x" == h.axis.toLowerCase() ? "x" : "y"),
+            j = 2 * g["outer" + ("rotatex" == i ? "Height" : "Width")]();g.find(g.data("back")).css({ transform: i + "(" + (h.reverse ? "180deg" : "-180deg") + ")" }), g.css({ perspective: j, position: "relative" });var k = h.speed / 1e3 || .5,
+            l = g.find(h.front).add(h.back, g);if ((h.forceHeight ? l.outerHeight(g.height()) : h.autoSize && l.css({ height: "100%" }), h.forceWidth ? l.outerWidth(g.width()) : h.autoSize && l.css({ width: "100%" }), l.css({ "backface-visibility": "hidden", "transform-style": "preserve-3d", position: "absolute", "z-index": "1" }), l.find("*").css({ "backface-visibility": "hidden" }), g.find(g.data("back")).css({ transform: i + "(" + (h.reverse ? "180deg" : "-180deg") + ")", "z-index": "0" }), (window.chrome || window.Intl && Intl.v8BreakIterator) && "CSS" in window && g.css({ "-webkit-transform-style": "preserve-3d" }), setTimeout(function () {
+          l.css({ transition: "all " + k + "s ease-out" }), void 0 !== f && f.call(this);
+        }, 20), "click" == h.trigger.toLowerCase())) g.on(a.fn.tap ? "tap" : "click", function (d) {
+          d || (d = window.event), g.find(a(d.target).closest('button, a, input[type="submit"]')).length || (g.data("flipped") ? c(g) : b(g));
+        });else if ("hover" == h.trigger.toLowerCase()) {
+          var m = function m() {
+            g.unbind("mouseleave", n), b(g), setTimeout(function () {
+              g.bind("mouseleave", n), g.is(":hover") || c(g);
+            }, h.speed + 150);
+          },
+              n = function n() {
+            c(g);
+          };g.mouseenter(m), g.mouseleave(n);
+        }
+      } else "toggle" == d && (d = !g.data("flipped")), d ? b(g, f) : c(g, f);
+    }), this);
+  };var e = function e(b, c) {
+    var d = !1;if ((void 0 !== b.axis && a(this).data("axis") != b.axis.toLowerCase() && (a(this).data("axis", b.axis.toLowerCase()), d = !0), void 0 !== b.reverse && a(this).data("reverse") != b.reverse && (a(this).data("reverse", b.reverse), d = !0), d)) {
+      var e = a(this).find(a(this).data("front")).add(a(this).data("back"), a(this)),
+          f = e.css("transition");e.css({ transition: "none" });var g = "rotate" + a(this).data("axis");a(this).data("flipped") ? a(this).find(a(this).data("front")).css({ transform: g + (a(this).data("reverse") ? "(-180deg)" : "(180deg)"), "z-index": "0" }) : a(this).find(a(this).data("back")).css({ transform: g + "(" + (a(this).data("reverse") ? "180deg" : "-180deg") + ")", "z-index": "0" }), setTimeout((function () {
+        e.css({ transition: f }), c.call(this);
+      }).bind(this), 0);
+    } else setTimeout(c.bind(this), 0);
+  };
+})(_jquery2["default"]);
+
+
+},{"jquery":4}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -15,9 +77,52 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _flipJs = require('./flip.js');
+
+var _flipJs2 = _interopRequireDefault(_flipJs);
+
+var _questionJs = require('./question.js');
+
+var _questionJs2 = _interopRequireDefault(_questionJs);
+
 console.log('Hello, World');
 
-},{"jquery":2,"moment":3,"underscore":4}],2:[function(require,module,exports){
+// $('#card').on('click', function(){
+//   console.log('clicked!');
+// });
+
+(0, _jquery2['default'])('.card').flip({
+  trigger: 'hover',
+  axis: 'x'
+});
+
+// Question Objects
+
+console.log(_questionJs2['default']);
+
+var q1 = new _questionJs2['default']({
+  question: 'What is 1 + 1?',
+  answer: 2
+});
+
+console.log(q1.question);
+
+},{"./flip.js":1,"./question.js":3,"jquery":4,"moment":5,"underscore":6}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Question = function Question(obj) {
+  obj = obj || {};
+  this.question = obj.question;
+  this.answer = obj.answer;
+};
+
+exports["default"] = Question;
+module.exports = exports["default"];
+
+},{}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9229,7 +9334,7 @@ return jQuery;
 
 }));
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12425,7 +12530,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -13975,7 +14080,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[1])
+},{}]},{},[2])
 
 
 //# sourceMappingURL=main.js.map
