@@ -60,7 +60,28 @@ var _jquery2 = _interopRequireDefault(_jquery);
 })(_jquery2["default"]);
 
 
-},{"jquery":4}],2:[function(require,module,exports){
+},{"jquery":6}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Hitter = function Hitter(obj) {
+  obj = obj || {};
+  this.outsLeft = 3;
+  this.score = 0;
+  this.getOut = function () {
+    return this.outsLeft = this.outsLeft - 1;
+  };
+  this.homeRun = function () {
+    return this.score = this.score + 1;
+  };
+};
+
+exports["default"] = Hitter;
+module.exports = exports["default"];
+
+},{}],3:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -85,6 +106,14 @@ var _questionJs = require('./question.js');
 
 var _questionJs2 = _interopRequireDefault(_questionJs);
 
+var _hitterJs = require('./hitter.js');
+
+var _hitterJs2 = _interopRequireDefault(_hitterJs);
+
+var _pitcherJs = require('./pitcher.js');
+
+var _pitcherJs2 = _interopRequireDefault(_pitcherJs);
+
 console.log('Hello, World');
 
 // Keep in case I want to send the number of clicks somewhere
@@ -101,29 +130,79 @@ console.log('Hello, World');
 
 console.log(_questionJs2['default']);
 
+// Questions
 var q1 = new _questionJs2['default']({
   title: 'Question 1',
   question: 'What is 1 + 1?',
   answer: 2
 });
 
+var q2 = new _questionJs2['default']({
+  title: 'Question 2',
+  question: 'What is 1 + 2?',
+  answer: 3
+});
+
+var hitter = new _hitterJs2['default']({});
+
+(0, _jquery2['default'])('.outs').text(hitter.outsLeft);
+(0, _jquery2['default'])('.score').text(hitter.score);
+
+// Starting point question
 (0, _jquery2['default'])('#card-front').text(q1.title);
 (0, _jquery2['default'])('#card-back').text(q1.question);
 
+// Submitting an answer
 (0, _jquery2['default'])('#submitBtn').on('click', function () {
   var answer = (0, _jquery2['default'])('#answerText').val();
   console.log(answer);
   console.log(q1.answer);
   if (answer == q1.answer) {
     (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
+    (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
+    hitter.homeRun();
+    (0, _jquery2['default'])('.score').text(hitter.score);
   } else {
+    hitter.getOut();
+    (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
+    (0, _jquery2['default'])('.score').text(hitter.score);
     (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
   };
+
+  (0, _jquery2['default'])('#nextQBtn').on('click', function () {
+    (0, _jquery2['default'])('#card-front').text(q2.title);
+    (0, _jquery2['default'])('#card-back').text(q2.question);
+    (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('green');
+  });
+
+  (0, _jquery2['default'])('#submitBtn').on('click', function () {
+    var answer = (0, _jquery2['default'])('#answerText').val();
+    console.log(answer);
+    console.log(q2.answer);
+    if (answer == q2.answer) {
+      (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
+    } else {
+      (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
+    };
+  });
 });
 
 console.log(q1.question);
 
-},{"./flip.js":1,"./question.js":3,"jquery":4,"moment":5,"underscore":6}],3:[function(require,module,exports){
+},{"./flip.js":1,"./hitter.js":2,"./pitcher.js":4,"./question.js":5,"jquery":6,"moment":7,"underscore":8}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Pitcher = function Pitcher(obj) {
+  obj = obj || {};
+};
+
+exports["default"] = Pitcher;
+module.exports = exports["default"];
+
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -139,7 +218,7 @@ var Question = function Question(obj) {
 exports["default"] = Question;
 module.exports = exports["default"];
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9351,7 +9430,7 @@ return jQuery;
 
 }));
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12547,7 +12626,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14097,7 +14176,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[2])
+},{}]},{},[3])
 
 
 //# sourceMappingURL=main.js.map

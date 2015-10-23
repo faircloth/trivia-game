@@ -2116,6 +2116,9 @@ h1 {
   font-size: 1.6em;
   text-align: center; }
 
+.results-normal {
+  background-color: black; }
+
 .green {
   background-color: green; }
 
