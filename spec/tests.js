@@ -36,6 +36,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var Question = function Question(obj) {
   obj = obj || {};
+  this.title = obj.title;
   this.question = obj.question;
   this.answer = obj.answer;
 };

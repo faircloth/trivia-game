@@ -87,6 +87,7 @@ var _questionJs2 = _interopRequireDefault(_questionJs);
 
 console.log('Hello, World');
 
+// Keep in case I want to send the number of clicks somewhere
 // $('#card').on('click', function(){
 //   console.log('clicked!');
 // });
@@ -101,9 +102,13 @@ console.log('Hello, World');
 console.log(_questionJs2['default']);
 
 var q1 = new _questionJs2['default']({
+  title: 'Question 1',
   question: 'What is 1 + 1?',
   answer: 2
 });
+
+(0, _jquery2['default'])('#card-front').text(q1.title);
+(0, _jquery2['default'])('#card-back').text(q1.question);
 
 console.log(q1.question);
 
@@ -115,6 +120,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var Question = function Question(obj) {
   obj = obj || {};
+  this.title = obj.title;
   this.question = obj.question;
   this.answer = obj.answer;
 };

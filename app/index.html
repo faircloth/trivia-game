@@ -15,15 +15,23 @@
 
   <h1>Welcome to Primer Baseball Trivia</h1>
 
+  <div>
+    <p class="instructions">These are the instructions to the game</p>
+  </div>
 
+  <p class="hover-to-flip">Hover over the card to flip</p>
 
   <div class="card">
     <div class="front">
-    <p id="front">Front</p>
+      <p><span id="card-front">Front</span></p>
     </div>
-    <div class="front">
-      Back
+    <div class="back">
+      <p><span id="card-back">Back</span></p>
     </div>
+  </div>
+
+  <div class="answer-entry">
+    <input type="text" placeholder="Enter your answer">
   </div>
 
 
@@ -33,10 +41,6 @@
       <li>Score: <span class="score">X</span></li>
       <li>Time remaining <span class="time">X</span></li>
     </ul>
-  </div>
-
-  <div>
-    <p class="instructions">These are the instructions to the game</p>
   </div>
 
   <div class="diamond">
