@@ -122,7 +122,7 @@ var _pitcherJs2 = _interopRequireDefault(_pitcherJs);
 
 // ---- FLIP ----
 (0, _jquery2['default'])('.card').flip({
-  trigger: 'click',
+  trigger: 'hover',
   axis: 'y'
 });
 // ---- FLIP ----

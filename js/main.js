@@ -9,7 +9,7 @@ import Pitcher from './pitcher.js';
 
 // ---- FLIP ----
 $('.card').flip({
-  trigger: 'click',
+  trigger: 'hover',
   axis: 'y',
 });
 // ---- FLIP ----
