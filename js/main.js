@@ -34,7 +34,6 @@ let q3 = new Question({
   answer: 10
 });
 
-console.log(q2.answer);
 // ---- QUESTIONS ----
 
 
@@ -43,12 +42,30 @@ console.log(q2.answer);
 let hitter = new Hitter({
 });
 
-
 let pitcher = new Pitcher ({
 });
 // ---- GAME CONSTRUCTORS ----
 
-// ---- NEW GAME ----
+
+// ---- KEEPING SCORE ----
+
+let questionNumber = 1;
+let countQuestions = function () {
+  return questionNumber + 1;
+}
+
+
+
+console.log('Questions asked so far = ' + questionNumber );
+console.log('The player has hit submit ' + pitcher.pitches + ' times.');
+
+
+
+// ---- KEEPING SCORE ----
+
+
+
+// ---- START OVER ----
 
 $('#startOverBtn').on('click', function (){
   pitcher.startOver();
@@ -69,17 +86,13 @@ $('#startOverBtn').on('click', function (){
   };
 });
 
-// ---- MAY BE A BETTER WAY ----
-// window.onload = pitcher.startOver();
-// ---- MAY BE A BETTER WAY ----
-
-// ---- NEW GAME ----
+// ---- START OVER ----
 
 
 
 
 // ---- STATUS ----
-console.log(pitcher.pitches);
+
 if (pitcher.pitches === 0){
   $('.outs').text(hitter.outsLeft);
   $('.score').text(hitter.score);
@@ -92,16 +105,7 @@ if (pitcher.pitches === 0){
 // ---- STATUS ----
 
 
-// ---- CLICK EVENTS ----
-
-  let questionNumber = 1;
-
-  let countQuestions = function () {
-    return questionNumber + 1;
-  }
-
-  console.log('Questions asked so far = ' + questionNumber );
-
+// ---- CLICK EVENTS ----  
 
 $('#submitBtn').on('click', function () {
   

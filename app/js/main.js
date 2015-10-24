@@ -146,7 +146,6 @@ var q3 = new _questionJs2['default']({
   answer: 10
 });
 
-console.log(q2.answer);
 // ---- QUESTIONS ----
 
 // ---- GAME CONSTRUCTORS ----
@@ -155,7 +154,19 @@ var hitter = new _hitterJs2['default']({});
 var pitcher = new _pitcherJs2['default']({});
 // ---- GAME CONSTRUCTORS ----
 
-// ---- NEW GAME ----
+// ---- KEEPING SCORE ----
+
+var questionNumber = 1;
+var countQuestions = function countQuestions() {
+  return questionNumber + 1;
+};
+
+console.log('Questions asked so far = ' + questionNumber);
+console.log('The player has hit submit ' + pitcher.pitches + ' times.');
+
+// ---- KEEPING SCORE ----
+
+// ---- START OVER ----
 
 (0, _jquery2['default'])('#startOverBtn').on('click', function () {
   pitcher.startOver();
@@ -176,14 +187,10 @@ var pitcher = new _pitcherJs2['default']({});
   };
 });
 
-// ---- MAY BE A BETTER WAY ----
-// window.onload = pitcher.startOver();
-// ---- MAY BE A BETTER WAY ----
-
-// ---- NEW GAME ----
+// ---- START OVER ----
 
 // ---- STATUS ----
-console.log(pitcher.pitches);
+
 if (pitcher.pitches === 0) {
   (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
   (0, _jquery2['default'])('.score').text(hitter.score);
@@ -195,15 +202,7 @@ if (pitcher.pitches === 0) {
 
 // ---- STATUS ----
 
-// ---- CLICK EVENTS ----
-
-var questionNumber = 1;
-
-var countQuestions = function countQuestions() {
-  return questionNumber + 1;
-};
-
-console.log('Questions asked so far = ' + questionNumber);
+// ---- CLICK EVENTS ---- 
 
 (0, _jquery2['default'])('#submitBtn').on('click', function () {
 
