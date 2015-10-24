@@ -69,6 +69,12 @@ Object.defineProperty(exports, "__esModule", {
 var Hitter = function Hitter(obj) {
   obj = obj || {};
   this.outsLeft = 3;
+  this.newSetOfOuts = function () {
+    return this.outsLeft = 3;
+  };
+  this.newScore = function () {
+    return this.score = 0;
+  };
   this.score = 0;
   this.getOut = function () {
     return this.outsLeft = this.outsLeft - 1;
@@ -124,14 +130,20 @@ var _pitcherJs2 = _interopRequireDefault(_pitcherJs);
 // ---- QUESTIONS ----
 var q1 = new _questionJs2['default']({
   title: 'Question 1',
-  question: 'What is 1 + 1?',
-  answer: 2
+  question: 'How many innings are in a MLB game?',
+  answer: 9
 });
 
 var q2 = new _questionJs2['default']({
   title: 'Question 2',
   question: 'What is 1 + 2?',
   answer: 3
+});
+
+var q3 = new _questionJs2['default']({
+  title: 'Question 3',
+  question: 'What is 5 + 5?',
+  answer: 10
 });
 
 console.log(q2.answer);
@@ -144,9 +156,24 @@ var pitcher = new _pitcherJs2['default']({});
 // ---- GAME CONSTRUCTORS ----
 
 // ---- NEW GAME ----
+
 (0, _jquery2['default'])('#startOverBtn').on('click', function () {
   pitcher.startOver();
+  hitter.newSetOfOuts();
+  hitter.newScore();
   console.log(pitcher.pitches);
+  if (pitcher.pitches === 0) {
+    (0, _jquery2['default'])('.outs').text(3);
+    (0, _jquery2['default'])('.score').text(0);
+    (0, _jquery2['default'])('#card-front').text(q1.title);
+    (0, _jquery2['default'])('#card-back').text(q1.question);
+    (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('green');
+    (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('red');
+    (0, _jquery2['default'])('#endOfGame').addClass('hiddenEOG');
+    (0, _jquery2['default'])('.arrowimg').addClass('hidden');
+  } else {
+    alert('Pitches have been thrown');
+  };
 });
 
 // ---- MAY BE A BETTER WAY ----
@@ -168,11 +195,50 @@ if (pitcher.pitches === 0) {
 
 // ---- STATUS ----
 
+// ---- CLICK EVENTS ----
+
+var questionNumber = 1;
+
+var countQuestions = function countQuestions() {
+  return questionNumber + 1;
+};
+
+console.log('Questions asked so far = ' + questionNumber);
+
 (0, _jquery2['default'])('#submitBtn').on('click', function () {
 
   pitcher.throwPitch();
   console.log(pitcher.pitches);
+  (0, _jquery2['default'])('.arrowimg').removeClass('hidden');
+
+  if ((0, _jquery2['default'])('.outs').text() == 0 || pitcher.pitches == 10) {
+    (0, _jquery2['default'])('#endOfGame').addClass('endOfGame');
+  };
+
+  if (pitcher.pitches > questionNumber) {
+    alert('Go to next question');
+  }
 });
+
+(0, _jquery2['default'])('#nextQBtn').on('click', function () {
+
+  (0, _jquery2['default'])('.arrowimg').addClass('hidden');
+
+  countQuestions();
+
+  if ((0, _jquery2['default'])('.outs').text() == 0 || pitcher.pitches == 10) {
+    (0, _jquery2['default'])('#endOfGame').addClass('endOfGame');
+  };
+});
+
+// ---- CLICK EVENTS ----
+
+// ---- GAME CONCLUSION ----
+
+var maxNumOfPitches = 10;
+var outsOnBoard = (0, _jquery2['default'])('.outs').text();
+
+// ---- GAME CONCLUSION ----
 
 // ---- THE GAME ----
 
@@ -202,14 +268,13 @@ if (pitcher.pitches === 0) {
 // ---- CALL FOR ANOTHER ----
 
 (0, _jquery2['default'])('#nextQBtn').on('click', function () {
+
   if (pitcher.pitches === 1) {
     (0, _jquery2['default'])('#card-front').text(q2.title);
     (0, _jquery2['default'])('#card-back').text(q2.question);
     (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('green');
     (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('red');
-  } else {
-    alert('something went wrong');
-  };
+  }
 });
 
 // ---- CALL FOR ANOTHER ----
@@ -223,6 +288,42 @@ if (pitcher.pitches === 0) {
   if (pitcher.pitches === 2) {
 
     if (answer == q2.answer) {
+      hitter.homeRun();
+      (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
+      (0, _jquery2['default'])('.score').text(hitter.score);
+    } else {
+      hitter.getOut();
+      (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
+      (0, _jquery2['default'])('.score').text(hitter.score);
+      (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
+    };
+  }
+});
+
+// ---- THE SECOND PITCH ----
+
+// ---- CALL FOR ANOTHER ----
+
+(0, _jquery2['default'])('#nextQBtn').on('click', function () {
+  if (pitcher.pitches === 2) {
+    (0, _jquery2['default'])('#card-front').text(q3.title);
+    (0, _jquery2['default'])('#card-back').text(q3.question);
+    (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('green');
+    (0, _jquery2['default'])('#answer-result').text('Results?!?!').parent().removeClass('red');
+  }
+});
+
+// ---- CALL FOR ANOTHER ----
+
+// ---- THE THIRD PITCH ----
+
+(0, _jquery2['default'])('#submitBtn').on('click', function () {
+
+  var answer = (0, _jquery2['default'])('#answerText').val();
+
+  if (pitcher.pitches === 3) {
+
+    if (answer == q3.answer) {
       hitter.homeRun();
       (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
       (0, _jquery2['default'])('.score').text(hitter.score);

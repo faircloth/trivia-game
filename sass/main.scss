@@ -8,6 +8,9 @@ $cardBorderFront: 2px solid $primerNavy;
 $cardBorderBack: 2px solid $primerLightBlue;
 $cardBorderRadius: 10px;
 
+
+// --- STRUCTURE OF THE PAGE
+
 body {
   background: #e2ebf3;
   color: $primerNavy;
@@ -16,28 +19,115 @@ body {
 }
 
 .body-container {
-  max-width: 600px;
   margin: 20px auto;
+  border-radius: $cardBorderRadius;
+  @include outer-container;
   border: 1px solid $primerNavy;
+  max-width: 800px;
 }
+
+.hiddenEOG {
+  display: none;
+}
+
+.endOfGame {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  border: $cardBorderFront;
+  border-radius: cardBorderRadius;
+  text-align: center;
+  font-size: 2.4em;
+}
+
+// --- COLUMN STRUCTURE
+
+.column1 {
+  @include span-columns(6);
+  // border: 1px solid black;
+  margin: 1em;
+}
+
+.column2 {
+  @include span-columns(5.5);
+  // border: 1px solid black;
+  margin: 1em;
+}
+
+// --- BANNER
 
 img.banner{
   width: 100%;
+  border-radius: $cardBorderRadius;
 }
+
+// --- INTRO TO THE GAME
 
 h1 {
   text-align: center;
   font-size: 2.4em;
 }
 
+.instructions {
+  font-size: 2.0em;
+  text-align: center;
+  margin: 8px 10uto;
+}
+
+// --- THE DIAMOND
+
+#startOverBtn {
+  display: block;
+  margin: 5px auto;
+  background-color: $primerNavy;
+  color: white;
+  border: $cardBorderBack;
+  border-radius: $cardBorderRadius;
+  padding: 10px;
+  width: 30%;
+  font-size: 1.6em;
+}
+
+.diamond {
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+}
+
+.box1 {
+  position: absolute;
+  color: white;
+  bottom: 20px;
+  left: 45%;
+  width: 10%;
+  display: inline-block;
+  text-align: center;
+}
+
+.playerimg {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+.diamond-img {
+  width: 100%;
+}
+
+
+
+// --- QUESTION AND ANSWERS
+
 .hover-to-flip {
   text-align: center;
   font-size: 1.6em;
+  margin: 0;
+  padding-bottom: .5em;
 }
 
 .card {
   margin: 0 auto;
-  width: 40%;
+  width: 100%;
   height: 150px;
 
     p {
@@ -49,9 +139,9 @@ h1 {
 
       span {
       position: absolute;
-      top: 40%;
+      top: 35%;
       font-size: 1.8em;
-      padding: 0;
+      padding: 0 5px;
       margin: 0;
       text-align: center;
       width: 100%;
@@ -74,9 +164,9 @@ h1 {
 
 .answer-entry {
   margin-top: 10px;
-  width: 40%;
+  display: inline-block;
+  width: 100%;
   height: 60px;
-  display: block;
   margin: 10px auto;
   font-size: 1.6em;
 
@@ -99,19 +189,55 @@ h1 {
   border: $cardBorderBack;
   border-radius: $cardBorderRadius;
   padding: 10px;
-  width: 40%;
+  width: 100%;
   font-size: 1.6em;
 }
 
-.answer-result {
-  display: block;
-  margin: 10px auto;
-  background-color: black;
+.nextQ {
+  position: relative;
+  height: 60px;
+}
+
+#nextQBtn {
+  display: inline-block;
+  position: absolute;
+  left: 30%;
+  margin: 5px auto;
+  background-color: gray;
   color: white;
   border: $cardBorderBack;
   border-radius: $cardBorderRadius;
   padding: 10px;
   width: 40%;
+  font-size: 1.6em;
+}
+
+.arrowimg {
+  width: 60px;
+  padding: 4px;
+  padding-right: 8px;
+  display: inline-block;
+  float: right;
+  vertical-align: top;
+}
+
+img.hidden {
+      display: none;
+    }
+
+
+
+// --- RESULTS
+
+.answer-result {
+  display: block;
+  margin: 0 auto;
+  background-color: lightgray;
+  color: $primerNavy;
+  border: $cardBorderBack;
+  border-radius: $cardBorderRadius;
+  padding: 10px;
+  width: 100%;
   font-size: 1.6em;
   text-align: center;
 }
@@ -122,16 +248,18 @@ h1 {
 
 .green {
   background-color: green;
+  color: white;
 }
 
 .red {
   background-color: red;
+  color: white;
 }
    
 
 .scoreboard {
   display: block;
-  width: 80%;
+  width: 100%;
   border: 1px solid black;
   margin: 10px auto;
   background-color: black;
@@ -139,27 +267,38 @@ h1 {
 
 .scoreboard-list {
   list-style-type: none;
+  padding: 3px 2px 3px 8px;
 
     li {
-      display: inline-block;
-      margin: 0 12px;
       justify-content: space-between;
-      font-size: 1.5em;
+      font-size: 2.5em;
+      line-height: 2em;
       color: white;
+      text-transform: uppercase;
+      padding: 0;
+      margin: 0;
+
+      span {
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+        padding: 2px 7px;
+        margin-left: 3px;
+      }
     }
 }
 
-.instructions {
-  font-size: 2.0em;
-  text-align: center;
-}
 
-.diamond {
-  margin: 0 auto;
-  border: 1px solid black;
-  width: 50%;
-}
-
-.diamond-img {
-  width: 100%;
+@media screen and (max-width: 600px) {
+  .column1 {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid $primerNavy;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  .column2 {
+    display: block;
+    width: 100%;
+  }
 }

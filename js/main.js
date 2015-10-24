@@ -18,14 +18,20 @@ $('.card').flip({
 // ---- QUESTIONS ----
 let q1 = new Question({
   title: 'Question 1',
-  question: 'What is 1 + 1?',
-  answer: 2
+  question: 'How many innings are in a MLB game?',
+  answer: 9
 });
 
 let q2 = new Question({
   title: 'Question 2',
   question: 'What is 1 + 2?',
   answer: 3
+});
+
+let q3 = new Question({
+  title: 'Question 3',
+  question: 'What is 5 + 5?',
+  answer: 10
 });
 
 console.log(q2.answer);
@@ -43,9 +49,24 @@ let pitcher = new Pitcher ({
 // ---- GAME CONSTRUCTORS ----
 
 // ---- NEW GAME ----
+
 $('#startOverBtn').on('click', function (){
   pitcher.startOver();
+  hitter.newSetOfOuts();
+  hitter.newScore();
   console.log(pitcher.pitches);
+  if (pitcher.pitches === 0){
+    $('.outs').text(3);
+    $('.score').text(0);
+    $('#card-front').text(q1.title);
+    $('#card-back').text(q1.question);
+    $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
+    $('#answer-result').text('Results?!?!').parent().removeClass('red'); 
+    $('#endOfGame').addClass('hiddenEOG');
+    $('.arrowimg').addClass('hidden');
+  } else {
+    alert('Pitches have been thrown');
+  };
 });
 
 // ---- MAY BE A BETTER WAY ----
@@ -53,6 +74,7 @@ $('#startOverBtn').on('click', function (){
 // ---- MAY BE A BETTER WAY ----
 
 // ---- NEW GAME ----
+
 
 
 
@@ -70,13 +92,58 @@ if (pitcher.pitches === 0){
 // ---- STATUS ----
 
 
+// ---- CLICK EVENTS ----
+
+  let questionNumber = 1;
+
+  let countQuestions = function () {
+    return questionNumber + 1;
+  }
+
+  console.log('Questions asked so far = ' + questionNumber );
+
 
 $('#submitBtn').on('click', function () {
   
   pitcher.throwPitch();
   console.log(pitcher.pitches);
+  $('.arrowimg').removeClass('hidden');
+
+  if ( $('.outs').text() == 0  || pitcher.pitches == 10 ) {
+    $('#endOfGame').addClass('endOfGame');
+  };
+
+  if ( pitcher.pitches > questionNumber) {
+    alert('Go to next question');
+  }
 
 });
+
+
+$('#nextQBtn').on('click', function () {
+
+  $('.arrowimg').addClass('hidden');
+  
+  countQuestions();
+
+  if ( $('.outs').text() == 0 || pitcher.pitches == 10 ) {
+    $('#endOfGame').addClass('endOfGame');
+  };
+
+});
+
+
+// ---- CLICK EVENTS ----
+
+
+
+// ---- GAME CONCLUSION ----
+
+let maxNumOfPitches = 10;
+var outsOnBoard = $('.outs').text();
+
+// ---- GAME CONCLUSION ----
+
 
 
 // ---- THE GAME ----
@@ -110,20 +177,16 @@ $('#submitBtn').on('click', function () {
 
 
 
-
-
 // ---- CALL FOR ANOTHER ----
 
 $('#nextQBtn').on('click', function () {
+
   if (pitcher.pitches === 1) {
     $('#card-front').text(q2.title);
     $('#card-back').text(q2.question);
     $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
     $('#answer-result').text('Results?!?!').parent().removeClass('red'); 
   }
-  else {
-    alert('something went wrong');
-  };
 });
   
 // ---- CALL FOR ANOTHER ---- 
@@ -155,7 +218,47 @@ $('#submitBtn').on('click', function () {
 
 });
 
+// ---- THE SECOND PITCH ----
 
+
+
+// ---- CALL FOR ANOTHER ----
+
+$('#nextQBtn').on('click', function () {
+  if (pitcher.pitches === 2) {
+    $('#card-front').text(q3.title);
+    $('#card-back').text(q3.question);
+    $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
+    $('#answer-result').text('Results?!?!').parent().removeClass('red'); 
+  }
+});
+  
+// ---- CALL FOR ANOTHER ---- 
+
+
+// ---- THE THIRD PITCH ----
+
+$('#submitBtn').on('click', function () {
+
+  var answer = $('#answerText').val();
+
+  if (pitcher.pitches === 3) {
+
+    if (answer == q3.answer) {
+      hitter.homeRun();
+      $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
+      $('.score').text(hitter.score);
+    }
+    else {
+      hitter.getOut();
+      $('.outs').text(hitter.outsLeft);
+      $('.score').text(hitter.score);
+      $('#answer-result').text('OUT!').parent().addClass('red')
+    };  
+
+  }
+
+});
 
 // ---- THE SECOND PITCH ----
 

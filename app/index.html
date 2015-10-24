@@ -15,52 +15,78 @@
 
   <h1>Welcome to Primer Baseball Trivia</h1>
 
-  <div>
-    <p class="instructions">These are the instructions to the game</p>
-  </div>
 
-  <button id="startOverBtn">
-    Start over
-  </button>
+  <p id="endOfGame" class="hiddenEOG">
+    This is the end of the game
+  </p>
 
-  <p class="hover-to-flip">Hover over the card to flip</p>
+  <div class="top-row">
+     <div>
+      <p class="instructions">These are the instructions to the game</p>
+      </div>
 
-  <div class="card">
-    <div class="front">
-      <p><span id="card-front">Front</span></p>
+    <button id="startOverBtn">
+      Start over
+    </button>
+
+    <div class="diamond">
+      <div class="box1">
+      <img class="playerimg" src="http://images.clipartpanda.com/airpower-clipart-baseball-player-clipart-images-29.jpg">
+      </div>
+        <img class="diamond-img" src="http://www.cliparthut.com/clip-arts/1255/baseball-field-clip-art-1255770.png">
     </div>
-    <div class="back">
-      <p><span id="card-back">Back</span></p>
+    
+  </div> 
+
+  <div class="column1">
+    <p class="hover-to-flip">Click on the card to flip</p>
+
+    <div class="card">
+      <div class="front">
+        <p><span id="card-front">Front</span></p>
+      </div>
+      <div class="back">
+        <p><span id="card-back">Back</span></p>
+      </div>
     </div>
+
+    <div class="answer-entry">
+      <input id="answerText" type="text" placeholder="Enter your answer">
+    </div>
+
+    <button id="submitBtn">
+      Submit answer
+    </button> 
+
+    <div class="nextQ">
+      <button id="nextQBtn">
+        Next question
+      </button>
+        <img class="arrowimg hidden" src="http://www.designofsignage.com/application/symbol/hands/image/600x600/hand-point-left-1.jpg">
+    </div>
+
   </div>
+  
 
-  <div class="answer-entry">
-    <input id="answerText" type="text" placeholder="Enter your answer">
-  </div>
+  <div class="column2">
 
-  <button id="submitBtn">
-    Submit answer
-  </button>
+  <p class="hover-to-flip">How'd you do?</p>
 
-  <div class="answer-result">
-    <p id="answer-result">Result?!?!</p>
-  </div>
+    <div class="answer-result">
+      <p id="answer-result">Result?!?!</p>
+    </div>
 
 
-  <div class= "scoreboard">
-    <ul class="scoreboard-list">
-      <li>Outs remaining: <span class="outs"></span></li>
-      <li>Score: <span class="score"></span></li>
-    </ul>
-  </div>
+    <div class= "scoreboard">
+      <ul class="scoreboard-list">
+        <li>Outs remaining: <span class="outs"></span></li>
+        <li>Score: <span class="score"></span></li>
+      </ul>
+    </div>
+    
+  </div>  
 
-  <button id="nextQBtn">
-    Next question
-  </button>
-
-  <div class="diamond">
-    <img class="diamond-img" src="http://cdn.scrapbook.com/products/source/SBC_spc-36373.jpg">
-  </div>
+  
     
     <script src="js/main.js"></script>
 
