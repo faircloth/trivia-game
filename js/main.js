@@ -9,7 +9,7 @@ import Pitcher from './pitcher.js';
 
 // ---- FLIP ----
 $('.card').flip({
-  trigger: 'hover',
+  trigger: 'click',
   axis: 'y',
 });
 // ---- FLIP ----
@@ -51,17 +51,28 @@ let pitcher = new Pitcher ({
 
 let questionNumber = 1;
 let countQuestions = function () {
-  return questionNumber + 1;
+  return questionNumber = questionNumber + 1;
 }
-
-
 
 console.log('Questions asked so far = ' + questionNumber );
 console.log('The player has hit submit ' + pitcher.pitches + ' times.');
 
-
-
 // ---- KEEPING SCORE ----
+
+
+
+// ---- START STATUS ----
+
+if (pitcher.pitches === 0){
+  $('.outs').text(hitter.outsLeft);
+  $('.score').text(hitter.score);
+  $('#card-front').text(q1.title);
+  $('#card-back').text(q1.question);
+} else {
+  alert('Pitches have been thrown');
+};
+
+// ---- START STATUS ----
 
 
 
@@ -71,7 +82,8 @@ $('#startOverBtn').on('click', function (){
   pitcher.startOver();
   hitter.newSetOfOuts();
   hitter.newScore();
-  console.log(pitcher.pitches);
+  console.log('Questions asked so far = ' + questionNumber );
+  console.log('The player has hit submit ' + pitcher.pitches + ' times.');
   if (pitcher.pitches === 0){
     $('.outs').text(3);
     $('.score').text(0);
@@ -91,53 +103,64 @@ $('#startOverBtn').on('click', function (){
 
 
 
-// ---- STATUS ----
-
-if (pitcher.pitches === 0){
-  $('.outs').text(hitter.outsLeft);
-  $('.score').text(hitter.score);
-  $('#card-front').text(q1.title);
-  $('#card-back').text(q1.question);
-} else {
-  alert('Pitches have been thrown');
-};
-
-// ---- STATUS ----
-
-
 // ---- CLICK EVENTS ----  
 
+
+
+// ---- SUBMIT BUTTON ----  
 $('#submitBtn').on('click', function () {
-  
-  pitcher.throwPitch();
-  console.log(pitcher.pitches);
-  $('.arrowimg').removeClass('hidden');
+
+  if (pitcher.pitches >= questionNumber) {
+    alert('Go to the next question');
+  }
+  else {
+    pitcher.throwPitch();
+    console.log('The player has hit submit ' + pitcher.pitches + ' time.');    
+    $('.arrowimg').removeClass('hidden');
+  }
 
   if ( $('.outs').text() == 0  || pitcher.pitches == 10 ) {
     $('#endOfGame').addClass('endOfGame');
-  };
-
-  if ( pitcher.pitches > questionNumber) {
-    alert('Go to next question');
+    $('#finalScore').append(hitter.score);
   }
 
 });
 
+// ---- SUBMIT BUTTON ----  
+
+
+// ---- NEXT BUTTON ----  
 
 $('#nextQBtn').on('click', function () {
 
   $('.arrowimg').addClass('hidden');
+  $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
+  $('#answer-result').text('Results?!?!').parent().removeClass('red');
   
   countQuestions();
+  console.log('Questions asked so far = ' + questionNumber);
 
   if ( $('.outs').text() == 0 || pitcher.pitches == 10 ) {
     $('#endOfGame').addClass('endOfGame');
   };
 
+  if (pitcher.pitches === 1) {
+    $('#card-front').text(q2.title);
+    $('#card-back').text(q2.question);  
+  }
+  else if (pitcher.pitches === 2) {
+    $('#card-front').text(q3.title);
+    $('#card-back').text(q3.question); 
+  }
+
 });
 
+// ---- NEXT BUTTON ---- 
 
-// ---- CLICK EVENTS ----
+
+
+
+// ---- CLICK EVENTS END ----
 
 
 
@@ -156,11 +179,11 @@ var outsOnBoard = $('.outs').text();
 // ---- THE FIRST PITCH ----
 
 $('#submitBtn').on('click', function () {
-  
+
   var answer = $('#answerText').val();
 
   if (pitcher.pitches === 1) {
-
+    
     if (answer == q1.answer) {
       hitter.homeRun();
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
@@ -171,7 +194,7 @@ $('#submitBtn').on('click', function () {
       $('.outs').text(hitter.outsLeft);
       $('.score').text(hitter.score);
       $('#answer-result').text('OUT!').parent().addClass('red')
-    };  
+    };
 
   }
 
@@ -181,31 +204,14 @@ $('#submitBtn').on('click', function () {
 
 
 
-// ---- CALL FOR ANOTHER ----
-
-$('#nextQBtn').on('click', function () {
-
-  if (pitcher.pitches === 1) {
-    $('#card-front').text(q2.title);
-    $('#card-back').text(q2.question);
-    $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
-    $('#answer-result').text('Results?!?!').parent().removeClass('red'); 
-  }
-});
-  
-// ---- CALL FOR ANOTHER ---- 
-
-
-
-
 // ---- THE SECOND PITCH ----
 
 $('#submitBtn').on('click', function () {
-
+ 
   var answer = $('#answerText').val();
 
   if (pitcher.pitches === 2) {
-
+  
     if (answer == q2.answer) {
       hitter.homeRun();
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
@@ -225,21 +231,6 @@ $('#submitBtn').on('click', function () {
 // ---- THE SECOND PITCH ----
 
 
-
-// ---- CALL FOR ANOTHER ----
-
-$('#nextQBtn').on('click', function () {
-  if (pitcher.pitches === 2) {
-    $('#card-front').text(q3.title);
-    $('#card-back').text(q3.question);
-    $('#answer-result').text('Results?!?!').parent().removeClass('green'); 
-    $('#answer-result').text('Results?!?!').parent().removeClass('red'); 
-  }
-});
-  
-// ---- CALL FOR ANOTHER ---- 
-
-
 // ---- THE THIRD PITCH ----
 
 $('#submitBtn').on('click', function () {
@@ -247,7 +238,7 @@ $('#submitBtn').on('click', function () {
   var answer = $('#answerText').val();
 
   if (pitcher.pitches === 3) {
-
+  
     if (answer == q3.answer) {
       hitter.homeRun();
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
@@ -261,10 +252,10 @@ $('#submitBtn').on('click', function () {
     };  
 
   }
-
+  
 });
 
-// ---- THE SECOND PITCH ----
+// ---- THE THIRD PITCH ----
 
 
 
