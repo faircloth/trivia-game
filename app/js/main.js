@@ -178,6 +178,49 @@ var q6 = new _questionJs2['default']({
   otherAnswer3: 'san francisco giants'
 });
 
+var q7 = new _questionJs2['default']({
+  title: 'Question 7',
+  question: 'Which MLB team has won the most World Series Championships',
+  answer: 'New York Yankees',
+  otherAnswer1: 'new york yankees',
+  otherAnswer2: 'Yankees',
+  otherAnswer3: 'yankees'
+});
+
+var q8 = new _questionJs2['default']({
+  title: 'Question 8',
+  question: 'How many games are in the MLB regular season?',
+  answer: '162'
+});
+
+var q9 = new _questionJs2['default']({
+  title: 'Question 9',
+  question: 'What team is missing from this list of AL West teams: Mariners, Angels, Rangers, Athletics?',
+  answer: 'Astros',
+  otherAnswer1: 'astros'
+});
+
+var q10 = new _questionJs2['default']({
+  title: 'Question 10',
+  question: 'What team won the 2013 World Series?',
+  answer: 'Boston Red Sox',
+  otherAnswer1: 'boston red sox',
+  otherAnswer2: 'boston',
+  otherAnswer3: 'Red Sox',
+  otherAnswer4: 'red sox',
+  otherAnswer5: 'Boston'
+});
+
+var q11 = new _questionJs2['default']({
+  title: 'Question 11',
+  question: 'Which MLB team has the highest payroll?',
+  answer: 'LA Dodgers',
+  otherAnswer1: 'Dodgers',
+  otherAnswer2: 'dodgers',
+  otherAnswer3: 'Los Angeles Dodgers',
+  otherAnswer4: 'la dodgers'
+});
+
 // ---- QUESTIONS ----
 
 // ---- GAME CONSTRUCTORS ----
@@ -190,6 +233,12 @@ var pitcher = new _pitcherJs2['default']({});
 
 var delay = 400;
 var addOn = 400;
+
+// let delayTimer = function (selector, modification, style, wait) {
+//   setTimeout ( function () {
+//     '$' + '(' + selector + ')' + modification + '(' + style + ')';
+//   }, wait);
+// };
 
 var animation = function animation() {
 
@@ -376,7 +425,7 @@ var answerOutcome = function answerOutcome(pitchNumber, questionObject) {
 
     if (pitcher.pitches === pitchNumber && pitcher.pitches == questionNumber) {
 
-      if (answer == questionObject.answer || answer == questionObject.otherAnswer1 || answer == questionObject.otherAnswer2 || answer == questionObject.otherAnswer3 || answer == questionObject.otherAnswer4) {
+      if (answer == questionObject.answer || answer == questionObject.otherAnswer1 || answer == questionObject.otherAnswer2 || answer == questionObject.otherAnswer3 || answer == questionObject.otherAnswer4 || answer == questionObject.otherAnswer5 || answer == questionObject.otherAnswer6) {
         hitter.homeRun();
         animation();
 
@@ -445,6 +494,8 @@ var Question = function Question(obj) {
   this.otherAnswer2 = obj.otherAnswer2;
   this.otherAnswer3 = obj.otherAnswer3;
   this.otherAnswer4 = obj.otherAnswer4;
+  this.otherAnswer5 = obj.otherAnswer5;
+  this.otherAnswer6 = obj.otherAnswer6;
 };
 
 exports["default"] = Question;

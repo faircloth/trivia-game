@@ -68,6 +68,49 @@ let q6 = new Question({
   otherAnswer3: 'san francisco giants'
 });
 
+let q7 = new Question({
+  title: 'Question 7',
+  question: 'Which MLB team has won the most World Series Championships',
+  answer: 'New York Yankees',
+  otherAnswer1: 'new york yankees',
+  otherAnswer2: 'Yankees',
+  otherAnswer3: 'yankees'
+});
+
+let q8 = new Question({
+  title: 'Question 8',
+  question: 'How many games are in the MLB regular season?',
+  answer: '162'
+});
+
+let q9 = new Question({
+  title: 'Question 9',
+  question: 'What team is missing from this list of AL West teams: Mariners, Angels, Rangers, Athletics?',
+  answer: 'Astros',
+  otherAnswer1: 'astros'
+});
+
+let q10 = new Question({
+  title: 'Question 10',
+  question: 'What team won the 2013 World Series?',
+  answer: 'Boston Red Sox',
+  otherAnswer1: 'boston red sox',
+  otherAnswer2: 'boston',
+  otherAnswer3: 'Red Sox',
+  otherAnswer4: 'red sox',
+  otherAnswer5: 'Boston'
+});
+
+let q11 = new Question({
+  title: 'Question 11',
+  question: 'Which MLB team has the highest payroll?',
+  answer: 'LA Dodgers',
+  otherAnswer1: 'Dodgers',
+  otherAnswer2: 'dodgers',
+  otherAnswer3: 'Los Angeles Dodgers',
+  otherAnswer4: 'la dodgers'
+});
+
 // ---- QUESTIONS ----
 
 
@@ -90,6 +133,12 @@ let pitcher = new Pitcher ({
 
 let delay = 400;
 let addOn = 400;
+
+// let delayTimer = function (selector, modification, style, wait) {
+//   setTimeout ( function () {
+//     '$' + '(' + selector + ')' + modification + '(' + style + ')';
+//   }, wait);
+// };
 
 let animation = function () {
 
@@ -303,7 +352,9 @@ let answerOutcome = function (pitchNumber, questionObject) {
           answer == questionObject.otherAnswer1 ||
           answer == questionObject.otherAnswer2 ||
           answer == questionObject.otherAnswer3 ||
-          answer == questionObject.otherAnswer4) {
+          answer == questionObject.otherAnswer4 ||
+          answer == questionObject.otherAnswer5 ||
+          answer == questionObject.otherAnswer6) {
         hitter.homeRun();
         animation ();
       
