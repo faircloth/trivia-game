@@ -131,20 +131,22 @@ var _pitcherJs2 = _interopRequireDefault(_pitcherJs);
 var q1 = new _questionJs2['default']({
   title: 'Question 1',
   question: 'How many innings are in a MLB game?',
-  answer: 9
+  answer: 9,
+  otherAnswer1: 'nine',
+  otherAnswer2: 'Nine'
 });
 
 var q2 = new _questionJs2['default']({
   title: 'Question 2',
   question: 'What does ERA stand for?',
   answer: 'earned run average',
-  otherAnswer: 'Earned Run Average'
+  otherAnswer1: 'Earned Run Average'
 });
 
 var q3 = new _questionJs2['default']({
   title: 'Question 3',
   question: 'In baseball, each position has an assigned number. What number is assigned to the Shortstop position?',
-  answer: 6
+  answer: 6 || 'six' || 'Six'
 });
 
 // ---- QUESTIONS ----
@@ -155,7 +157,7 @@ var hitter = new _hitterJs2['default']({});
 var pitcher = new _pitcherJs2['default']({});
 // ---- GAME CONSTRUCTORS ----
 
-// ANIMATION
+// ---- ANIMATION ----
 
 var delay = 400;
 var addOn = 400;
@@ -219,6 +221,15 @@ var animation = function animation() {
   }, delay + addOn + addOn + addOn + addOn + addOn + addOn + addOn + addOn);
 };
 
+// ---- ANIMATION ----
+
+// ---- GAME CONCLUSION ----
+
+var maxNumOfPitches = 10;
+var outsOnBoard = (0, _jquery2['default'])('.outs').text();
+
+// ---- GAME CONCLUSION ----
+
 // ---- KEEPING SCORE ----
 
 var questionNumber = 1;
@@ -268,8 +279,6 @@ if (pitcher.pitches === 0) {
 
 // ---- START OVER ----
 
-// ---- CLICK EVENTS ---- 
-
 // ---- SUBMIT BUTTON ---- 
 (0, _jquery2['default'])('#submitBtn').on('click', function () {
 
@@ -318,90 +327,40 @@ if (pitcher.pitches === 0) {
 
 // ---- NEXT BUTTON ----
 
-// ---- CLICK EVENTS END ----
+// ---- PITCH FUNCTION ----
 
-// ---- GAME CONCLUSION ----
+var answerOutcome = function answerOutcome(pitchNumber, questionObject) {
 
-var maxNumOfPitches = 10;
-var outsOnBoard = (0, _jquery2['default'])('.outs').text();
+  (0, _jquery2['default'])('#submitBtn').on('click', function () {
 
-// ---- GAME CONCLUSION ----
+    var answer = (0, _jquery2['default'])('#answerText').val();
+    console.log(pitcher.pitches);
 
-// ---- THE GAME ----
+    if (pitcher.pitches === pitchNumber && pitcher.pitches == questionNumber) {
 
-// ---- THE FIRST PITCH ----
+      if (answer == questionObject.answer || answer == questionObject.otherAnswer1 || answer == questionObject.otherAnswer2 || answer == questionObject.otherAnswer3 || answer == questionObject.otherAnswer4) {
+        hitter.homeRun();
+        animation();
 
-(0, _jquery2['default'])('#submitBtn').on('click', function () {
+        (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
+        (0, _jquery2['default'])('.score').text(hitter.score);
+      } else {
+        hitter.getOut();
+        (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
+        (0, _jquery2['default'])('.score').text(hitter.score);
+        (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
+      };
+    }
+  });
+};
 
-  var answer = (0, _jquery2['default'])('#answerText').val();
-  console.log(pitcher.pitches);
+// --- GAME FUNCTIONS ---
 
-  if (pitcher.pitches === 1 && pitcher.pitches == questionNumber) {
+answerOutcome(1, q1);
+answerOutcome(2, q2);
+answerOutcome(3, q3);
 
-    if (answer == q1.answer) {
-      hitter.homeRun();
-      animation();
-
-      (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
-      (0, _jquery2['default'])('.score').text(hitter.score);
-    } else {
-      hitter.getOut();
-      (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
-      (0, _jquery2['default'])('.score').text(hitter.score);
-      (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
-    };
-  }
-});
-
-// ---- THE FIRST PITCH ----
-
-// ---- THE SECOND PITCH ----
-
-(0, _jquery2['default'])('#submitBtn').on('click', function () {
-
-  var answer = (0, _jquery2['default'])('#answerText').val();
-
-  if (pitcher.pitches === 2 && pitcher.pitches == questionNumber) {
-
-    if (answer == q2.answer || answer == q2.otherAnswer) {
-      hitter.homeRun();
-      animation();
-      (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
-      (0, _jquery2['default'])('.score').text(hitter.score);
-    } else {
-      hitter.getOut();
-      (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
-      (0, _jquery2['default'])('.score').text(hitter.score);
-      (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
-    };
-  }
-});
-
-// ---- THE SECOND PITCH ----
-
-// ---- THE THIRD PITCH ----
-
-(0, _jquery2['default'])('#submitBtn').on('click', function () {
-
-  var answer = (0, _jquery2['default'])('#answerText').val();
-
-  if (pitcher.pitches === 3 && pitcher.pitches == questionNumber) {
-
-    if (answer == q3.answer) {
-      hitter.homeRun();
-      animation();
-      (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
-      (0, _jquery2['default'])('.score').text(hitter.score);
-    } else {
-      hitter.getOut();
-      (0, _jquery2['default'])('.outs').text(hitter.outsLeft);
-      (0, _jquery2['default'])('.score').text(hitter.score);
-      (0, _jquery2['default'])('#answer-result').text('OUT!').parent().addClass('red');
-    };
-  }
-});
-
-// ---- THE THIRD PITCH ----
+// --- GAME FUNCTIONS ---
 
 },{"./flip.js":1,"./hitter.js":2,"./pitcher.js":4,"./question.js":5,"jquery":6,"moment":7,"underscore":8}],4:[function(require,module,exports){
 "use strict";
@@ -434,7 +393,10 @@ var Question = function Question(obj) {
   this.title = obj.title;
   this.question = obj.question;
   this.answer = obj.answer;
-  this.otherAnswer = obj.otherAnswer;
+  this.otherAnswer1 = obj.otherAnswer1;
+  this.otherAnswer2 = obj.otherAnswer2;
+  this.otherAnswer3 = obj.otherAnswer3;
+  this.otherAnswer4 = obj.otherAnswer4;
 };
 
 exports["default"] = Question;

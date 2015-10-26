@@ -14,27 +14,35 @@ $('.card').flip({
 });
 // ---- FLIP ----
 
+
+
+
 // ---- QUESTIONS ----
 let q1 = new Question({
   title: 'Question 1',
   question: 'How many innings are in a MLB game?',
-  answer: 9
+  answer: 9,
+  otherAnswer1: 'nine',
+  otherAnswer2: 'Nine'
 });
 
 let q2 = new Question({
   title: 'Question 2',
   question: 'What does ERA stand for?',
   answer: 'earned run average',
-  otherAnswer: 'Earned Run Average'
+  otherAnswer1: 'Earned Run Average'
 });
 
 let q3 = new Question({
   title: 'Question 3',
   question: 'In baseball, each position has an assigned number. What number is assigned to the Shortstop position?',
-  answer: 6
+  answer: 6 || 'six' || 'Six'
 });
 
 // ---- QUESTIONS ----
+
+
+
 
 
 
@@ -46,7 +54,10 @@ let pitcher = new Pitcher ({
 });
 // ---- GAME CONSTRUCTORS ----
 
-// ANIMATION
+
+
+
+// ---- ANIMATION ----
 
 let delay = 400;
 let addOn = 400;
@@ -111,6 +122,20 @@ let animation = function () {
 
 };
 
+// ---- ANIMATION ----
+
+
+
+
+// ---- GAME CONCLUSION ----
+
+let maxNumOfPitches = 10;
+var outsOnBoard = $('.outs').text();
+
+// ---- GAME CONCLUSION ----
+
+
+
 // ---- KEEPING SCORE ----
 
 let questionNumber = 1;
@@ -163,11 +188,6 @@ $('#startOverBtn').on('click', function (){
 });
 
 // ---- START OVER ----
-
-
-
-
-// ---- CLICK EVENTS ----  
 
 
 
@@ -226,110 +246,50 @@ $('#nextQBtn').on('click', function () {
 // ---- NEXT BUTTON ---- 
 
 
+// ---- PITCH FUNCTION ----
 
+let answerOutcome = function (pitchNumber, questionObject) {
 
-// ---- CLICK EVENTS END ----
+  $('#submitBtn').on('click', function () {
 
+    var answer = $('#answerText').val();
+    console.log(pitcher.pitches);
 
+    if (pitcher.pitches === pitchNumber && pitcher.pitches == questionNumber) {
+      
+      if (answer == questionObject.answer ||
+          answer == questionObject.otherAnswer1 ||
+          answer == questionObject.otherAnswer2 ||
+          answer == questionObject.otherAnswer3 ||
+          answer == questionObject.otherAnswer4) {
+        hitter.homeRun();
+        animation ();
+      
+        $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
+        $('.score').text(hitter.score);
+      }
+      else {
+        hitter.getOut();
+        $('.outs').text(hitter.outsLeft);
+        $('.score').text(hitter.score);
+        $('#answer-result').text('OUT!').parent().addClass('red')
+      };
 
-// ---- GAME CONCLUSION ----
-
-let maxNumOfPitches = 10;
-var outsOnBoard = $('.outs').text();
-
-// ---- GAME CONCLUSION ----
-
-
-
-// ---- THE GAME ----
-
-
-// ---- THE FIRST PITCH ----
-
-$('#submitBtn').on('click', function () {
-
-  var answer = $('#answerText').val();
-  console.log(pitcher.pitches);
-
-  if (pitcher.pitches === 1 && pitcher.pitches == questionNumber) {
-    
-    if (answer == q1.answer) {
-      hitter.homeRun();
-      animation ();
-    
-      $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
-      $('.score').text(hitter.score);
     }
-    else {
-      hitter.getOut();
-      $('.outs').text(hitter.outsLeft);
-      $('.score').text(hitter.score);
-      $('#answer-result').text('OUT!').parent().addClass('red')
-    };
 
-  }
-
-});
-
-// ---- THE FIRST PITCH ----
+  });
+}
 
 
 
-// ---- THE SECOND PITCH ----
+// --- GAME FUNCTIONS ---
 
-$('#submitBtn').on('click', function () {
- 
-  var answer = $('#answerText').val();
-
-  if (pitcher.pitches === 2 && pitcher.pitches == questionNumber) {
-  
-    if (answer == q2.answer || answer == q2.otherAnswer) {
-      hitter.homeRun();
-      animation ();
-      $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
-      $('.score').text(hitter.score);
-    }
-    else {
-      hitter.getOut();
-      $('.outs').text(hitter.outsLeft);
-      $('.score').text(hitter.score);
-      $('#answer-result').text('OUT!').parent().addClass('red')
-    };  
-
-  }
-
-});
-
-// ---- THE SECOND PITCH ----
+answerOutcome (1, q1);
+answerOutcome (2, q2);
+answerOutcome (3, q3);
 
 
-// ---- THE THIRD PITCH ----
-
-$('#submitBtn').on('click', function () {
-
-  var answer = $('#answerText').val();
-
-  if (pitcher.pitches === 3 && pitcher.pitches == questionNumber) {
-  
-    if (answer == q3.answer) {
-      hitter.homeRun();
-      animation ();
-      $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
-      $('.score').text(hitter.score);
-    }
-    else {
-      hitter.getOut();
-      $('.outs').text(hitter.outsLeft);
-      $('.score').text(hitter.score);
-      $('#answer-result').text('OUT!').parent().addClass('red')
-    };  
-
-  }
-  
-});
-
-// ---- THE THIRD PITCH ----
-
+// --- GAME FUNCTIONS ---
 
 
 
