@@ -146,7 +146,36 @@ var q2 = new _questionJs2['default']({
 var q3 = new _questionJs2['default']({
   title: 'Question 3',
   question: 'In baseball, each position has an assigned number. What number is assigned to the Shortstop position?',
-  answer: 6 || 'six' || 'Six'
+  answer: 6,
+  otherAnswer1: 'six',
+  otherAnswer2: 'Six'
+});
+
+var q4 = new _questionJs2['default']({
+  title: 'Question 4',
+  question: 'What is the last name of the pitcher who led the MLB in strikeouts this season?',
+  answer: 'Kershaw',
+  otherAnswer1: 'kershaw',
+  otherAnswer2: 'Clayton Kershaw',
+  otherAnswer3: 'clayton kershaw'
+});
+
+var q5 = new _questionJs2['default']({
+  title: 'Question 5',
+  question: 'What is the last name of the hitter who led the MLB in home runs this season?',
+  answer: 'Davis',
+  otherAnswer1: 'davis',
+  otherAnswer2: 'Chris Davis',
+  otherAnswer3: 'chris davis'
+});
+
+var q6 = new _questionJs2['default']({
+  title: 'Question 6',
+  question: 'What city\'s team won the 2014 World Series?',
+  answer: 'San Francisco',
+  otherAnswer1: 'san francisco',
+  otherAnswer2: 'San Francisco Giants',
+  otherAnswer3: 'san francisco giants'
 });
 
 // ---- QUESTIONS ----
@@ -298,6 +327,15 @@ if (pitcher.pitches === 0) {
 
 // ---- SUBMIT BUTTON ---- 
 
+// ---- DISPLAY THE NEXT QUESTION ---- 
+var questionDisplay = function questionDisplay(pitchNumber, questionObject) {
+  if (pitcher.pitches === pitchNumber) {
+    (0, _jquery2['default'])('#card-front').text(questionObject.title);
+    (0, _jquery2['default'])('#card-back').text(questionObject.question);
+  }
+};
+// ---- DISPLAY THE NEXT QUESTION ----   
+
 // ---- NEXT BUTTON ---- 
 
 (0, _jquery2['default'])('#nextQBtn').on('click', function () {
@@ -313,16 +351,16 @@ if (pitcher.pitches === 0) {
     (0, _jquery2['default'])('#endOfGame').addClass('endOfGame');
   };
 
-  if (pitcher.pitches === 1) {
-    (0, _jquery2['default'])('#card-front').text(q2.title);
-    (0, _jquery2['default'])('#card-back').text(q2.question);
-  } else if (pitcher.pitches === 2) {
-    (0, _jquery2['default'])('#card-front').text(q3.title);
-    (0, _jquery2['default'])('#card-back').text(q3.question);
-  } else if (pitcher.pitches === 3) {
-    (0, _jquery2['default'])('#card-front').text(q4.title);
-    (0, _jquery2['default'])('#card-back').text(q4.question);
-  }
+  questionDisplay(1, q2);
+  questionDisplay(2, q3);
+  questionDisplay(3, q4);
+  questionDisplay(4, q5);
+  questionDisplay(5, q6);
+  questionDisplay(6, q7);
+  questionDisplay(7, q8);
+  questionDisplay(8, q9);
+  questionDisplay(9, q10);
+  questionDisplay(10, q11);
 });
 
 // ---- NEXT BUTTON ----
@@ -354,11 +392,21 @@ var answerOutcome = function answerOutcome(pitchNumber, questionObject) {
   });
 };
 
+// ---- PITCH FUNCTION ----
+
 // --- GAME FUNCTIONS ---
 
 answerOutcome(1, q1);
 answerOutcome(2, q2);
 answerOutcome(3, q3);
+answerOutcome(4, q4);
+answerOutcome(5, q5);
+answerOutcome(6, q6);
+answerOutcome(7, q7);
+answerOutcome(8, q8);
+answerOutcome(9, q9);
+answerOutcome(10, q10);
+answerOutcome(11, q11);
 
 // --- GAME FUNCTIONS ---
 
