@@ -14,7 +14,6 @@ $('.card').flip({
 });
 // ---- FLIP ----
 
-
 // ---- QUESTIONS ----
 let q1 = new Question({
   title: 'Question 1',
@@ -24,14 +23,15 @@ let q1 = new Question({
 
 let q2 = new Question({
   title: 'Question 2',
-  question: 'What is 1 + 2?',
-  answer: 3
+  question: 'What does ERA stand for?',
+  answer: 'earned run average',
+  otherAnswer: 'Earned Run Average'
 });
 
 let q3 = new Question({
   title: 'Question 3',
-  question: 'What is 5 + 5?',
-  answer: 10
+  question: 'In baseball, each position has an assigned number. What number is assigned to the Shortstop position?',
+  answer: 6
 });
 
 // ---- QUESTIONS ----
@@ -46,6 +46,70 @@ let pitcher = new Pitcher ({
 });
 // ---- GAME CONSTRUCTORS ----
 
+// ANIMATION
+
+let delay = 400;
+let addOn = 400;
+
+let animation = function () {
+
+      setTimeout (function () {
+        $('.box1').addClass('hidden-runner');
+      }, delay);
+
+      setTimeout (function () {
+        $('.homerunMessage').addClass('showHrMessage');
+      }, delay);
+
+       setTimeout (function () {
+        $('#homePlate').removeClass('hidden-runner');
+      }, delay + addOn);
+
+       setTimeout (function () {
+        $('#homePlate').addClass('hidden-runner');
+      }, delay + addOn + addOn);
+
+      setTimeout (function () {
+        $('#firstBase').removeClass('hidden-runner');
+      }, delay + addOn + addOn);
+
+      setTimeout (function () {
+        $('#firstBase').addClass('hidden-runner');
+      }, delay + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('#secondBase').removeClass('hidden-runner');
+      }, delay + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('#secondBase').addClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn);
+      
+      setTimeout (function () {
+        $('#thirdBase').removeClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('#thirdBase').addClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('#homePlate').removeClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn + addOn);
+
+       setTimeout (function () {
+        $('#homePlate').addClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('.box1').removeClass('hidden-runner');
+      }, delay + addOn + addOn + addOn + addOn + addOn + addOn + addOn);
+
+      setTimeout (function () {
+        $('.homerunMessage').removeClass('showHrMessage');
+      }, delay + addOn + addOn + addOn + addOn + addOn + addOn + addOn + addOn);
+
+};
 
 // ---- KEEPING SCORE ----
 
@@ -152,6 +216,10 @@ $('#nextQBtn').on('click', function () {
     $('#card-front').text(q3.title);
     $('#card-back').text(q3.question); 
   }
+  else if (pitcher.pitches === 3) {
+    $('#card-front').text(q4.title);
+    $('#card-back').text(q4.question); 
+  }
 
 });
 
@@ -181,11 +249,14 @@ var outsOnBoard = $('.outs').text();
 $('#submitBtn').on('click', function () {
 
   var answer = $('#answerText').val();
+  console.log(pitcher.pitches);
 
-  if (pitcher.pitches === 1) {
+  if (pitcher.pitches === 1 && pitcher.pitches == questionNumber) {
     
     if (answer == q1.answer) {
       hitter.homeRun();
+      animation ();
+    
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
       $('.score').text(hitter.score);
     }
@@ -210,10 +281,11 @@ $('#submitBtn').on('click', function () {
  
   var answer = $('#answerText').val();
 
-  if (pitcher.pitches === 2) {
+  if (pitcher.pitches === 2 && pitcher.pitches == questionNumber) {
   
-    if (answer == q2.answer) {
+    if (answer == q2.answer || answer == q2.otherAnswer) {
       hitter.homeRun();
+      animation ();
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
       $('.score').text(hitter.score);
     }
@@ -237,10 +309,11 @@ $('#submitBtn').on('click', function () {
 
   var answer = $('#answerText').val();
 
-  if (pitcher.pitches === 3) {
+  if (pitcher.pitches === 3 && pitcher.pitches == questionNumber) {
   
     if (answer == q3.answer) {
       hitter.homeRun();
+      animation ();
       $('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green')
       $('.score').text(hitter.score);
     }

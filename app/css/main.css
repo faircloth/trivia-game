@@ -2028,7 +2028,7 @@ html {
   content: ""; }
 
 body {
-  background: #e2ebf3;
+  background-color: white;
   color: #082c38;
   font-size: 62.5%;
   font-family: 'Open Sans', sans-serif; }
@@ -2063,7 +2063,8 @@ body {
   display: block;
   margin-right: 2.35765%;
   width: 48.82117%;
-  margin: 1em; }
+  margin: 1em;
+  margin-top: 10px; }
   .column1:last-child {
     margin-right: 0; }
 
@@ -2072,7 +2073,8 @@ body {
   display: block;
   margin-right: 2.35765%;
   width: 44.55627%;
-  margin: 1em; }
+  margin: 1em;
+  margin-top: 10px; }
   .column2:last-child {
     margin-right: 0; }
 
@@ -2087,6 +2089,7 @@ h1 {
 .instructions {
   font-size: 2.0em;
   text-align: center;
+  padding: 10px 20px;
   margin: 8px 10uto; }
 
 #startOverBtn {
@@ -2102,8 +2105,10 @@ h1 {
 
 .diamond {
   margin: 0 auto;
-  width: 50%;
-  position: relative; }
+  width: 60%;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 30px; }
 
 .box1 {
   position: absolute;
@@ -2119,8 +2124,67 @@ h1 {
   height: 100%;
   padding: 0px; }
 
+.box2 {
+  position: absolute;
+  color: white;
+  bottom: 5%;
+  left: 45%;
+  width: 10%;
+  display: inline-block;
+  text-align: center; }
+
+.box3 {
+  position: absolute;
+  color: white;
+  bottom: 35%;
+  left: 82%;
+  width: 10%;
+  display: inline-block;
+  text-align: center; }
+
+.box4 {
+  position: absolute;
+  color: white;
+  bottom: 55%;
+  left: 45%;
+  width: 10%;
+  display: inline-block;
+  text-align: center; }
+
+.box5 {
+  position: absolute;
+  color: white;
+  bottom: 35%;
+  left: 8%;
+  width: 10%;
+  display: inline-block;
+  text-align: center; }
+
+.runnerimg {
+  width: 100%;
+  height: 100%;
+  padding: 0px; }
+
+.hidden-runner {
+  display: none; }
+
+.display-runner {
+  display: block; }
+
 .diamond-img {
-  width: 100%; }
+  width: 100%;
+  border-radius: 10px; }
+
+.homerunMessage {
+  position: absolute;
+  top: 30%;
+  left: 28%;
+  color: white;
+  font-size: 3.5em;
+  display: none; }
+
+.showHrMessage {
+  display: block; }
 
 .hover-to-flip {
   text-align: center;
@@ -2140,7 +2204,7 @@ h1 {
     position: relative; }
     .card p span {
       position: absolute;
-      top: 35%;
+      top: 30%;
       font-size: 1.8em;
       padding: 0 5px;
       margin: 0;
@@ -2259,7 +2323,7 @@ img.hidden {
       padding: 2px 7px;
       margin-left: 3px; }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) and (min-width: 300px) {
   .column1 {
     display: block;
     width: 100%;

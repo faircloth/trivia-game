@@ -23,20 +23,31 @@
 
   <div class="top-row">
      <div>
-      <p class="instructions">These are the instructions to the game</p>
+      <p class="instructions">Each correct answer is a home run and each incorrect answer is an out. Submit your answer only once. Play Ball!</p>
       </div>
-
-    <button id="startOverBtn">
-      Start over
-    </button>
 
     <div class="diamond">
       <div class="box1">
-      <img class="playerimg" src="http://images.clipartpanda.com/airpower-clipart-baseball-player-clipart-images-29.jpg">
+        <img class="playerimg" src="http://www.sherv.net/cm/emoticons/baseball/glitter-baseball-player-smiley-emoticon.gif">
       </div>
-        <img class="diamond-img" src="http://www.cliparthut.com/clip-arts/1255/baseball-field-clip-art-1255770.png">
-    </div>
+      <div class="box2">
+        <img id="homePlate" class="runnerimg hidden-runner" src="http://www.cliparthut.com/clip-arts/1595/animated-baseball-player-running-1595908.gif">
+      </div>
+      <div class="box3">
+        <img id="firstBase" class="runnerimg hidden-runner" src="http://www.cliparthut.com/clip-arts/1595/animated-baseball-player-running-1595908.gif">
+      </div>
+      <div class="box4">
+        <img id="secondBase" class="runnerimg hidden-runner" src="http://www.cliparthut.com/clip-arts/1595/animated-baseball-player-running-1595908.gif">
+      </div>
+      <div class="box5">
+        <img id="thirdBase" class="runnerimg hidden-runner" src="http://www.cliparthut.com/clip-arts/1595/animated-baseball-player-running-1595908.gif">
+      </div>
+      <p class="homerunMessage">HOME RUN!!!!</p>
+      <img class="diamond-img" src="http://encappro.com/wp-content/gallery/background_images_2/bkgd-baseball-diamond.jpg">
+    </div>   
     
+<!-- just running http://www.cliparthut.com/clip-arts/1595/animated-baseball-player-running-1595908.gif -->
+
   </div> 
 
   <div class="column1">
@@ -84,6 +95,10 @@
         <li>Score: <span class="score"></span></li>
       </ul>
     </div>
+
+    <button id="startOverBtn">
+      Start over
+    </button>
     
   </div>  
 

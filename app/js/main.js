@@ -136,14 +136,15 @@ var q1 = new _questionJs2['default']({
 
 var q2 = new _questionJs2['default']({
   title: 'Question 2',
-  question: 'What is 1 + 2?',
-  answer: 3
+  question: 'What does ERA stand for?',
+  answer: 'earned run average',
+  otherAnswer: 'Earned Run Average'
 });
 
 var q3 = new _questionJs2['default']({
   title: 'Question 3',
-  question: 'What is 5 + 5?',
-  answer: 10
+  question: 'In baseball, each position has an assigned number. What number is assigned to the Shortstop position?',
+  answer: 6
 });
 
 // ---- QUESTIONS ----
@@ -153,6 +154,70 @@ var hitter = new _hitterJs2['default']({});
 
 var pitcher = new _pitcherJs2['default']({});
 // ---- GAME CONSTRUCTORS ----
+
+// ANIMATION
+
+var delay = 400;
+var addOn = 400;
+
+var animation = function animation() {
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('.box1').addClass('hidden-runner');
+  }, delay);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('.homerunMessage').addClass('showHrMessage');
+  }, delay);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#homePlate').removeClass('hidden-runner');
+  }, delay + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#homePlate').addClass('hidden-runner');
+  }, delay + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#firstBase').removeClass('hidden-runner');
+  }, delay + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#firstBase').addClass('hidden-runner');
+  }, delay + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#secondBase').removeClass('hidden-runner');
+  }, delay + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#secondBase').addClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#thirdBase').removeClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#thirdBase').addClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#homePlate').removeClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('#homePlate').addClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('.box1').removeClass('hidden-runner');
+  }, delay + addOn + addOn + addOn + addOn + addOn + addOn + addOn);
+
+  setTimeout(function () {
+    (0, _jquery2['default'])('.homerunMessage').removeClass('showHrMessage');
+  }, delay + addOn + addOn + addOn + addOn + addOn + addOn + addOn + addOn);
+};
 
 // ---- KEEPING SCORE ----
 
@@ -245,6 +310,9 @@ if (pitcher.pitches === 0) {
   } else if (pitcher.pitches === 2) {
     (0, _jquery2['default'])('#card-front').text(q3.title);
     (0, _jquery2['default'])('#card-back').text(q3.question);
+  } else if (pitcher.pitches === 3) {
+    (0, _jquery2['default'])('#card-front').text(q4.title);
+    (0, _jquery2['default'])('#card-back').text(q4.question);
   }
 });
 
@@ -266,11 +334,14 @@ var outsOnBoard = (0, _jquery2['default'])('.outs').text();
 (0, _jquery2['default'])('#submitBtn').on('click', function () {
 
   var answer = (0, _jquery2['default'])('#answerText').val();
+  console.log(pitcher.pitches);
 
-  if (pitcher.pitches === 1) {
+  if (pitcher.pitches === 1 && pitcher.pitches == questionNumber) {
 
     if (answer == q1.answer) {
       hitter.homeRun();
+      animation();
+
       (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
       (0, _jquery2['default'])('.score').text(hitter.score);
     } else {
@@ -290,10 +361,11 @@ var outsOnBoard = (0, _jquery2['default'])('.outs').text();
 
   var answer = (0, _jquery2['default'])('#answerText').val();
 
-  if (pitcher.pitches === 2) {
+  if (pitcher.pitches === 2 && pitcher.pitches == questionNumber) {
 
-    if (answer == q2.answer) {
+    if (answer == q2.answer || answer == q2.otherAnswer) {
       hitter.homeRun();
+      animation();
       (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
       (0, _jquery2['default'])('.score').text(hitter.score);
     } else {
@@ -313,10 +385,11 @@ var outsOnBoard = (0, _jquery2['default'])('.outs').text();
 
   var answer = (0, _jquery2['default'])('#answerText').val();
 
-  if (pitcher.pitches === 3) {
+  if (pitcher.pitches === 3 && pitcher.pitches == questionNumber) {
 
     if (answer == q3.answer) {
       hitter.homeRun();
+      animation();
       (0, _jquery2['default'])('#answer-result').text('CORRECT! HOME RUN!').parent().addClass('green');
       (0, _jquery2['default'])('.score').text(hitter.score);
     } else {
@@ -361,6 +434,7 @@ var Question = function Question(obj) {
   this.title = obj.title;
   this.question = obj.question;
   this.answer = obj.answer;
+  this.otherAnswer = obj.otherAnswer;
 };
 
 exports["default"] = Question;

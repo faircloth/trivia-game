@@ -73,7 +73,7 @@ import Question from './question.js';
       
       it('wrong answer reduces outs', function() {
         expect(h.outsLeft).to.equal(3);
-        expect(h.wrongAnswer()).to.equal(2);
+        expect(h.getOut()).to.equal(2);
       });
 
     });
@@ -85,7 +85,6 @@ import Question from './question.js';
         expect(h.getOut()).to.equal(2);
         expect(h.getOut()).to.equal(1);
         expect(h.getOut()).to.equal(0);
-        expect(h.getOut()).to.equal(3);
       });
 
     });

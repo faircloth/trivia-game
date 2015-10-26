@@ -56,6 +56,7 @@ var Question = function Question(obj) {
   this.title = obj.title;
   this.question = obj.question;
   this.answer = obj.answer;
+  this.otherAnswer = obj.otherAnswer;
 };
 
 exports["default"] = Question;
@@ -140,7 +141,7 @@ var _questionJs2 = _interopRequireDefault(_questionJs);
 
       it('wrong answer reduces outs', function () {
         expect(h.outsLeft).to.equal(3);
-        expect(h.wrongAnswer()).to.equal(2);
+        expect(h.getOut()).to.equal(2);
       });
     });
 
@@ -151,7 +152,6 @@ var _questionJs2 = _interopRequireDefault(_questionJs);
         expect(h.getOut()).to.equal(2);
         expect(h.getOut()).to.equal(1);
         expect(h.getOut()).to.equal(0);
-        expect(h.getOut()).to.equal(3);
       });
     });
   });
